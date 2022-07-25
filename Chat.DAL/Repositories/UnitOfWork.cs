@@ -1,11 +1,6 @@
 ﻿using Chat.DAL.Entities;
 using Chat.DAL.EntityFramework;
 using Chat.DAL.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chat.DAL.Repositories
 {
@@ -24,6 +19,7 @@ namespace Chat.DAL.Repositories
                 return messageRepository;
             }
         }
+
         public IRepository<User> Users
         {
             get

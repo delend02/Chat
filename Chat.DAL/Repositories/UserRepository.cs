@@ -1,11 +1,6 @@
 ﻿using Chat.DAL.Entities;
 using Chat.DAL.EntityFramework;
 using Chat.DAL.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chat.DAL.Repositories
 {
@@ -30,6 +25,10 @@ namespace Chat.DAL.Repositories
                 db.Users.Remove(user);
         }
 
+        public User FindByKey(Func<User, bool> predicate)
+        {
+            return db.Users.Find(predicate);
+        }
 
         public User Get(ulong id)
         {
@@ -39,6 +38,11 @@ namespace Chat.DAL.Repositories
         public IEnumerable<User> GetAll()
         {
             return db.Users;
+        }
+
+        public IEnumerable<User> GetLast()
+        {
+            return db.Users.Take(15);
         }
 
         public void Update(User entity)
