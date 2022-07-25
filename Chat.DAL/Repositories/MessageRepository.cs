@@ -1,12 +1,6 @@
 ﻿using Chat.DAL.Entities;
 using Chat.DAL.EntityFramework;
 using Chat.DAL.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chat.DAL.Repositories
 {
@@ -31,6 +25,11 @@ namespace Chat.DAL.Repositories
                 db.Messages.Remove(message);
         }
 
+        public Message FindByKey(Func<Message, bool> predicate)
+        {
+            return db.Messages.Find(predicate);
+        }
+
         public Message Get(ulong id)
         {
             return db.Messages.Find(id);
@@ -39,6 +38,11 @@ namespace Chat.DAL.Repositories
         public IEnumerable<Message> GetAll()
         {
             return db.Messages;
+        }
+
+        public IEnumerable<Message> GetLast()
+        {
+            return db.Messages.Take(200);
         }
 
         public void Update(Message entity)
