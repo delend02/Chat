@@ -1,6 +1,7 @@
 ﻿using Chat.DAL.Entities;
 using Chat.DAL.EntityFramework;
 using Chat.DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Chat.DAL.Repositories
 {
@@ -9,6 +10,14 @@ namespace Chat.DAL.Repositories
         private ChatingContext db;
         private MessageRepository messageRepository;
         private UserRepository userRepository;
+
+        public UnitOfWork()
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<ChatingContext>();
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Chat;Trusted_Connection=True;");
+
+            db = new ChatingContext(optionsBuilder.Options);
+        }
 
         public IRepository<Message> Messages
         {
